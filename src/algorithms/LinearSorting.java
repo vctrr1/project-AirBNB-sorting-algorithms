@@ -1,12 +1,13 @@
 package algorithms;
-public class OrdenacaoLinear { // counting
+public class LinearSorting { // counting
 
-	public OrdenacaoLinear() {
+	public LinearSorting() {
+
 	}
 
 	public String[][] countSort(String[][] array, int dados) {
+        
         int tamanho = array.length;
-
         String[][] saida = new String[tamanho + 1][0];
 
         String[] max = array[1];
@@ -15,7 +16,6 @@ public class OrdenacaoLinear { // counting
             if (Double.parseDouble(array[i][dados]) > Double.parseDouble(max[dados]))
                 max = array[i];
         }
-        //System.out.println(max[0]); // PEGANDO O MAIOR 
 
         int[] cont = new int[(int)Double.parseDouble(max[dados]) + 1];
 

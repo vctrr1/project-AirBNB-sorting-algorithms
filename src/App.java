@@ -1,33 +1,29 @@
 import java.text.ParseException;
 
-import algorithms.OrdenacaoComparativa;
-import algorithms.OrdenacaoLinear;
-import algorithms.OrdenacaoRecursao;
-import utils.Data;
-import utils.GerarCsv;
+import algorithms.ComparisonSorting;
+import algorithms.LinearSorting;
+import algorithms.RecursiveSorting;
+import utils.ChangeDate;
+import utils.GenerateCSV;
 
 public class App {
 
 	public static void main(String[] args) throws ParseException {
 
-		GerarCsv gerarCsv = new GerarCsv();
-		Data.dateFormat();
-		String[][] array = gerarCsv.readFile("resultados/listings_review_date.csv"); // Mudar Arquivo 
+		GenerateCSV gerarCsv = new GenerateCSV();
+		ChangeDate.dateFormat();
 
-		// Abaixo todos os arrays que serão usado para ordenar
-		String[][] arrayElementar = array.clone();
-		String[][] arrayRecursao = array.clone();
-
+		//Delaração das Variaveis
+		String[][] array = gerarCsv.readFile("resultados/newDataSet-date-review.csv"); //Armazena o dataSet com novo formato de data
 		long tempoInicial;
 		long tempoFinal;
-		
-		OrdenacaoComparativa ordenarComparativa = new OrdenacaoComparativa(arrayElementar);
-		OrdenacaoLinear ordenarLinear = new OrdenacaoLinear();
-		OrdenacaoRecursao ordenarRecursao = new OrdenacaoRecursao(arrayRecursao);
+
+		//Instanciamento das Classes Ordenação
+		ComparisonSorting ordenarComparativa = new ComparisonSorting(array.clone());
+		LinearSorting ordenarLinear = new LinearSorting();
+		RecursiveSorting ordenarRecursao = new RecursiveSorting(array.clone());
 
 		// Algoritmos Lineares
-
-		// Counting sort
 		System.out.println("Counting sort: ");    
 		tempoInicial = System.currentTimeMillis();
 
@@ -99,13 +95,13 @@ public class App {
 		System.out.println("Merge sort: ");
 		tempoInicial = System.currentTimeMillis();
 
-		String[][] mergeMortes = ordenarRecursao.mergeSort(arrayRecursao.clone(), 1, arrayRecursao.length, 10);
+		String[][] mergeMortes = ordenarRecursao.mergeSort(array.clone(), 1, array.length, 10);
 		tempoFinal = System.currentTimeMillis();
 		gerarCsv.writeInFile(mergeMortes, "resultados/merge_ordena_preco.csv");
 		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
 
 		tempoInicial = System.currentTimeMillis();
-		String[][] mergeCasos = ordenarRecursao.mergeSort(arrayRecursao.clone(), 1, arrayRecursao.length, 12);
+		String[][] mergeCasos = ordenarRecursao.mergeSort(array.clone(), 1, array.length, 12);
 		tempoFinal = System.currentTimeMillis();
 		gerarCsv.writeInFile(mergeCasos, "resultados/merge_ordena.csv");
 		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
@@ -120,13 +116,13 @@ public class App {
 		//QuickSort
 		System.out.println("quick sort: ");
 		tempoInicial = System.currentTimeMillis();
-		String[][] quickMortes = ordenarRecursao.quickSort(array.clone(), 1, arrayRecursao.length - 1, 10); 
+		String[][] quickMortes = ordenarRecursao.quickSort(array.clone(), 1, array.length - 1, 10); 
 		tempoFinal = System.currentTimeMillis();
 		gerarCsv.writeInFile(quickMortes, "resultados/quick_ordena_preco.csv");
 		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
 
 		tempoInicial = System.currentTimeMillis();
-		String[][] quickCasos = ordenarRecursao.quickSort(array.clone(), 1, arrayRecursao.length - 1, 12); 
+		String[][] quickCasos = ordenarRecursao.quickSort(array.clone(), 1, array.length - 1, 12); 
 		tempoFinal = System.currentTimeMillis();
 		gerarCsv.writeInFile(quickCasos, "resultados/quick_ordena.csv");
 		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
@@ -142,15 +138,15 @@ public class App {
 		System.out.println("QuickSort com Mediana de 3: ");
 		tempoInicial = System.currentTimeMillis();
 
-		String[][] medianaMortes = ordenarRecursao.medianaDeTres(arrayRecursao.clone(), 1,
-				arrayRecursao.length - 1, 10);
+		String[][] medianaMortes = ordenarRecursao.medianaDeTres(array.clone(), 1,
+				array.length - 1, 10);
 		tempoFinal = System.currentTimeMillis();
 		gerarCsv.writeInFile(medianaMortes, "resultados/medianaDeTrês_ordena_preco.csv");
 		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
 
 		tempoInicial = System.currentTimeMillis();
-		String[][] medianaCasos = ordenarRecursao.medianaDeTres(arrayRecursao.clone(), 1,
-				arrayRecursao.length - 1, 12); 
+		String[][] medianaCasos = ordenarRecursao.medianaDeTres(array.clone(), 1,
+				array.length - 1, 12); 
 		tempoFinal = System.currentTimeMillis();
 		gerarCsv.writeInFile(medianaCasos, "resultados/medianaDeTrês_ordena.csv");
 		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");

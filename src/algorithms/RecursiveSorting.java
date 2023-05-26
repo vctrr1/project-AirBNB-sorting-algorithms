@@ -1,17 +1,17 @@
 package algorithms;
 import java.text.Collator;
 
-public class OrdenacaoRecursao {
+public class RecursiveSorting {
 	String[][] array = new String[22553][16];
 
-	public OrdenacaoRecursao(String[][] array) {
+	//construtor
+	public RecursiveSorting(String[][] array) {
 		for (int i = 0; i < array.length; i++) {
 			System.arraycopy(array[i], 0, this.array[i], 0, 14);
 		}
 	}
 
-	// merge
-	private static void organizar(String[][] vetor, int primeiro, int meio, int ultimo, int dados) {
+	private static void merge(String[][] vetor, int primeiro, int meio, int ultimo, int dados) {
 		String[][] array = new String[ultimo - primeiro][];
 		Collator comparar = Collator.getInstance();
 		comparar.setStrength(Collator.NO_DECOMPOSITION);
@@ -89,6 +89,7 @@ public class OrdenacaoRecursao {
 		}
 	}
 
+	//MergeSort
 	public String[][] mergeSort(String[][] vetor, int inicio, int fim, int dados) {
 
 		if (inicio < fim - 1) {
@@ -97,7 +98,7 @@ public class OrdenacaoRecursao {
 
 			mergeSort(vetor, inicio, meio, dados);
 			mergeSort(vetor, meio, fim, dados);
-			organizar(vetor, inicio, meio, fim, dados);
+			merge(vetor, inicio, meio, fim, dados);
 		}
 		return vetor;
 	}
@@ -322,7 +323,6 @@ public class OrdenacaoRecursao {
 	}
 
 	// HeapSort
-
 	public String[][] sort(String[][] array, int dados) {
 		int n = array.length;
 

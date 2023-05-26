@@ -5,11 +5,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
-public class GerarCsv {
+public class GenerateCSV {
 
 	String[][] arquivo = new String[22553][16];  // ESSES PARAMETROS
 
-	public GerarCsv() {
+	public GenerateCSV() {
+
 	}
 
 	public String[][] readFile(String path) { 
@@ -45,11 +46,11 @@ public class GerarCsv {
 					} else {
 						imprimeArquivo.print(lista[i][j]);
 					}
-
 				}
 				imprimeArquivo.println();
 				escreverArquivo.flush();
 			}
+
 			imprimeArquivo.close();
 
 		} catch (Exception e) {

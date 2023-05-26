@@ -10,7 +10,7 @@ A partir de um arquivo dataset no formato csv a aplicação irá organizar os da
  
 ### 2- Desenvolvimento
 
-A aplicação foi desenvolvida usando java e tem a "Application.java"como classe de aplicação, além das classes auxiliares "OrdenacaoComparativa.java","OrdenacaoLinear.java","OrdenacaoRecursao.java" e "GerarCsv.java" localizadas na pasta raiz do projeto.
+A aplicação foi desenvolvida usando java e tem a "App.java" como classe de aplicação, além das classes auxiliares "OrdenacaoComparativa.java","OrdenacaoLinear.java","OrdenacaoRecursao.java", "GerarCsv.java" e "Data.java" localizadas na pasta raiz do projeto.
  
 ### 3- Guia de execução
  

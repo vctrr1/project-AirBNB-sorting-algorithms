@@ -1,11 +1,12 @@
 package algorithms;
 import java.text.Collator;
 
-public class OrdenacaoComparativa { // Insertion e selection
+public class ComparisonSorting { // Insertion e selection
 
 	String[][] array = new String[22553][16];
 
-	public OrdenacaoComparativa(String[][] array) {
+	//construtor
+	public ComparisonSorting(String[][] array) {
 		for (int i = 0; i < array.length; i++) {
 			for (int j = 0; j < 16; j++) {
 				this.array[i][j] = array[i][j];
