@@ -1,4 +1,5 @@
 import java.text.ParseException;
+import java.util.Scanner;
 
 import algorithms.ComparisonSorting;
 import algorithms.LinearSorting;
@@ -10,6 +11,7 @@ public class App {
 
 	public static void main(String[] args) throws ParseException {
 
+		Scanner sc = new Scanner(System.in);
 		GenerateCSV gerarCsv = new GenerateCSV();
 		ChangeDate.dateFormat();
 
@@ -22,8 +24,79 @@ public class App {
 		ComparisonSorting ordenarComparativa = new ComparisonSorting(array.clone());
 		LinearSorting ordenarLinear = new LinearSorting();
 		RecursiveSorting ordenarRecursao = new RecursiveSorting(array.clone());
+		int op=55;
 
-		// Algoritmos Lineares
+		while(op != 0){
+			System.out.println("\n\n---------------------------------Sorting Algorithms---------------------------------");
+			System.out.println("1 -> SelectionSort");
+			System.out.println("2 -> InsertionSort");
+			System.out.println("3 -> CountSort");
+			System.out.println("4 -> MergeSort");
+			System.out.println("5 -> QuickSort");
+			System.out.println("6 -> Mediana de Tres");
+			System.out.println("7 -> Heapify");
+			System.out.println("8 -> Media de Todos os Algoritmos");
+			System.out.println("0 -> Sair");
+			System.out.println("--------------------------------------------------------------------------------------");
+			System.out.print("\nDigite a opção Desejada: ");
+
+			op = sc.nextInt();
+
+
+			switch (op) {
+				case 0:
+				 	break;
+				case 1:
+					//ordena pelo preço
+					System.out.println("\nSelection sort: ");
+					tempoInicial = System.currentTimeMillis();
+					String[][] selectionPrice = ordenarComparativa.selectionSort(10); // PRECO
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(selectionPrice, "resultados/selection-ordena-preco.csv"); 
+					System.out.println("Tempo de execução Preço: " + (tempoFinal - tempoInicial) + " ms");
+					//ordena pela quantidade de reviews
+					tempoInicial = System.currentTimeMillis();
+					String[][] selectionReviews = ordenarComparativa.selectionSort(12);  // NOME 
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(selectionReviews, "resultados/selection-ordena-reviews.csv"); // CASOS
+					System.out.println("Tempo de execução Reviews: " + (tempoFinal - tempoInicial) + " ms");
+					System.out.println("Para Ordenar: " + selectionReviews.length + " Elementos\n");
+					break;
+				case 2:
+					System.out.println("Insertion sort: ");
+					tempoInicial = System.currentTimeMillis();
+					String[][] insertionMortes = ordenarComparativa.insertionSort(10);
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(insertionMortes, "resultados/insertion_ordena_preco.csv");
+					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+		
+					tempoInicial = System.currentTimeMillis();
+					String[][] insertionCasos = ordenarComparativa.insertionSort(12); 
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(insertionCasos, "resultados/insertion_ordena.csv");
+					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+					System.out.println();
+					break;
+				case 3:
+					System.out.println("3");
+					break;
+				case 4:
+					System.out.println("4");
+					break;
+				case 5:
+					System.out.println("5");
+					break;
+					
+				default:
+					System.out.println("Opção Invalida");
+					break;
+			}
+		}
+		sc.close();
+		System.out.println("Programa executado com sucesso! Verifique os arquivos de saída na pasta resultados");
+			
+			
+			// Algoritmos Lineares
 		System.out.println("Counting sort: ");    
 		tempoInicial = System.currentTimeMillis();
 
@@ -46,41 +119,14 @@ public class App {
 		// Algoritmos Elementares
 
 		// Insertion sort
-		System.out.println("Insertion sort: ");
-		tempoInicial = System.currentTimeMillis();
-
-		String[][] insertionMortes = ordenarComparativa.insertionSort(10);
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(insertionMortes, "resultados/insertion_ordena_preco.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-
-		tempoInicial = System.currentTimeMillis();
-		String[][] insertionCasos = ordenarComparativa.insertionSort(12); 
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(insertionCasos, "resultados/insertion_ordena.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-
+		//System.out.println("Insertion sort: ");
 		/*tempoInicial = System.currentTimeMillis();
 		String[][] insertionCidades = ordenarComparativa.insertionSort(4); 
 		tempoFinal = System.currentTimeMillis();
 		gerarCsv.writeInFile(insertionCidades, "resultados/insertion_ordena.csv");
 		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");*/
-		System.out.println();
 
-		// Selection sort
-		System.out.println("Selection sort: ");
-		tempoInicial = System.currentTimeMillis();
 
-		String[][] selectionMortes = ordenarComparativa.selectionSort(10); // PRECO
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(selectionMortes, "resultados/selection_ordena_preco.csv"); 
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-
-		tempoInicial = System.currentTimeMillis();
-		String[][] selectionCasos = ordenarComparativa.selectionSort(12);  // NOME 
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(selectionCasos, "resultados/selection_ordena.csv"); // CASOS
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
 
 		/*tempoInicial = System.currentTimeMillis();
 		String[][] selectionCidades = ordenarComparativa.selectionSort(4); 
@@ -180,7 +226,6 @@ public class App {
 		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");*/
 		System.out.println();
 
-		System.out.println("Programa executado com sucesso! Verifique os arquivos de saída na pasta resultados");
 	}
 
 }

@@ -54,7 +54,7 @@ public class GenerateCSV {
 			imprimeArquivo.close();
 
 		} catch (Exception e) {
-			System.out.println("Error na escritura do arquivo");
+			System.out.println("Erro na escritura do arquivo");
 		}
 	}
 }
