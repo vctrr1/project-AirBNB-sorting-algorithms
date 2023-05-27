@@ -35,13 +35,12 @@ public class App {
 			System.out.println("5 -> QuickSort");
 			System.out.println("6 -> Mediana de Tres");
 			System.out.println("7 -> Heapify");
-			System.out.println("8 -> Media de Todos os Algoritmos");
+			System.out.println("8 -> Tempo de Execução de Todos os Algoritmos");
 			System.out.println("0 -> Sair");
 			System.out.println("--------------------------------------------------------------------------------------");
 			System.out.print("\nDigite a opção Desejada: ");
 
 			op = sc.nextInt();
-
 
 			switch (op) {
 				case 0:
@@ -60,33 +59,116 @@ public class App {
 					tempoFinal = System.currentTimeMillis();
 					gerarCsv.writeInFile(selectionReviews, "resultados/selection-ordena-reviews.csv"); // CASOS
 					System.out.println("Tempo de execução Reviews: " + (tempoFinal - tempoInicial) + " ms");
-					System.out.println("Para Ordenar: " + selectionReviews.length + " Elementos\n");
+					System.out.println("Os Algoritmos Ordenaram: " + selectionReviews.length + " Elementos");
+					System.out.println();
 					break;
 				case 2:
-					System.out.println("Insertion sort: ");
+					//ordena pelo preço
+					System.out.println("\nInsertion sort: ");
 					tempoInicial = System.currentTimeMillis();
-					String[][] insertionMortes = ordenarComparativa.insertionSort(10);
+					String[][] insertionPrice = ordenarComparativa.insertionSort(10);
 					tempoFinal = System.currentTimeMillis();
-					gerarCsv.writeInFile(insertionMortes, "resultados/insertion_ordena_preco.csv");
+					gerarCsv.writeInFile(insertionPrice, "resultados/insertion-ordena-preco.csv");
 					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-		
+					//ordena pela quantidade de reviews
 					tempoInicial = System.currentTimeMillis();
-					String[][] insertionCasos = ordenarComparativa.insertionSort(12); 
+					String[][] insertionReviews = ordenarComparativa.insertionSort(12); 
 					tempoFinal = System.currentTimeMillis();
-					gerarCsv.writeInFile(insertionCasos, "resultados/insertion_ordena.csv");
+					gerarCsv.writeInFile(insertionReviews, "resultados/insertion-ordena-reviews.csv");
 					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+					System.out.println("Os Algoritmos Ordenaram: " + insertionReviews.length + " Elementos");
 					System.out.println();
 					break;
 				case 3:
-					System.out.println("3");
+					System.out.println("\nCounting sort: ");    
+					tempoInicial = System.currentTimeMillis();
+					String[][] countingPriceOrdenado = ordenarLinear.countSort(array.clone(), 10); // PEGA A COLUNA PREÇO
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(countingPriceOrdenado, "resultados/counting-ordena-preco.csv"); 
+					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+		
+					tempoInicial = System.currentTimeMillis();
+					String[][] countingReviews = ordenarLinear.countSort(array.clone(), 12); 
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(countingReviews, "resultados/counting-ordena-reviews.csv");
+					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+					System.out.println("Os Algoritmos Ordenaram: " + countingReviews.length + " Elementos");
+					System.out.println();
 					break;
 				case 4:
-					System.out.println("4");
+					System.out.println("\nMerge sort: ");
+					tempoInicial = System.currentTimeMillis();
+					String[][] mergePrice = ordenarRecursao.mergeSort(array.clone(), 1, array.length, 10);
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(mergePrice, "resultados/merge-ordena-preco.csv");
+					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+		
+					tempoInicial = System.currentTimeMillis();
+					String[][] mergeReviews = ordenarRecursao.mergeSort(array.clone(), 1, array.length, 12);
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(mergeReviews, "resultados/merge-ordena-reviews.csv");
+					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+					System.out.println("Os Algoritmos Ordenaram: " + mergeReviews.length + " Elementos");
+					System.out.println();
 					break;
 				case 5:
-					System.out.println("5");
+					System.out.println("\nQuick sort: ");
+					tempoInicial = System.currentTimeMillis();
+					String[][] quickPrice = ordenarRecursao.quickSort(array.clone(), 1, array.length - 1, 10); 
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(quickPrice, "resultados/quick-ordena-preco.csv");
+					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+		
+					tempoInicial = System.currentTimeMillis();
+					String[][] quickReviews = ordenarRecursao.quickSort(array.clone(), 1, array.length - 1, 12); 
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(quickReviews, "resultados/quick-ordena-reviews.csv");
+					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+					System.out.println("Os Algoritmos Ordenaram: " + quickReviews.length + " Elementos");
+					System.out.println();
 					break;
-					
+				case 6:
+					System.out.println("QuickSort com Mediana de 3: ");
+					tempoInicial = System.currentTimeMillis();
+		
+					String[][] medianaPrice = ordenarRecursao.medianaDeTres(array.clone(), 1,array.length - 1, 10);
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(medianaPrice, "resultados/medianaDeTrês-ordena-preco.csv");
+					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+		
+					tempoInicial = System.currentTimeMillis();
+					String[][] medianaReviews = ordenarRecursao.medianaDeTres(array.clone(), 1,array.length - 1, 12); 
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(medianaReviews, "resultados/medianaDeTrês-ordena-reviews.csv");
+					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+					System.out.println("Os Algoritmos Ordenaram: " + medianaReviews.length + " Elementos");
+					System.out.println();
+					break;
+				case 7:
+					System.out.println("Heap sort: ");
+					tempoInicial = System.currentTimeMillis();
+					String[][] heapifyPrice = ordenarRecursao.sort(array.clone(), 10); // PREÇO
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(heapifyPrice, "resultados/Heapify_ordena_preco.csv");
+					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+
+					tempoInicial = System.currentTimeMillis();
+					String[][] heapifyReviews = ordenarRecursao.sort(array.clone(), 11); 
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(heapifyReviews, "resultados/Heapify_ordena.csv");
+					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+					System.out.println("Os Algoritmos Ordenaram: " + heapifyReviews.length + " Elementos");
+					System.out.println();
+					break;
+				case 8:
+					System.out.println("Insertion sort: ");
+					tempoInicial = System.currentTimeMillis();
+					String[][] insertionNames = ordenarComparativa.insertionSort(4); 
+					tempoFinal = System.currentTimeMillis();
+					gerarCsv.writeInFile(insertionNames, "resultados/insertion-ordena-nomes.csv");
+					System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
+					System.out.println("Os Algoritmos Ordenaram: " + insertionNames.length + " Elementos");
+					break;
 				default:
 					System.out.println("Opção Invalida");
 					break;
@@ -94,137 +176,6 @@ public class App {
 		}
 		sc.close();
 		System.out.println("Programa executado com sucesso! Verifique os arquivos de saída na pasta resultados");
-			
-			
-			// Algoritmos Lineares
-		System.out.println("Counting sort: ");    
-		tempoInicial = System.currentTimeMillis();
-
-		String[][] countingPrice = array.clone();
-		
-
-		String[][] countingPriceOrdenado = ordenarLinear.countSort(countingPrice, 10); // PEGA A COLUNA PREÇO
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(countingPriceOrdenado, "resultados/counting_ordena_preco.csv"); 
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-
-		String[][] countingCasos = array.clone();
-		tempoInicial = System.currentTimeMillis();
-		String[][] countingCasosOrdenado = ordenarLinear.countSort(countingCasos, 12); 
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(countingCasosOrdenado, "resultados/counting_ordena.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-		System.out.println();
-
-		// Algoritmos Elementares
-
-		// Insertion sort
-		//System.out.println("Insertion sort: ");
-		/*tempoInicial = System.currentTimeMillis();
-		String[][] insertionCidades = ordenarComparativa.insertionSort(4); 
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(insertionCidades, "resultados/insertion_ordena.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");*/
-
-
-
-		/*tempoInicial = System.currentTimeMillis();
-		String[][] selectionCidades = ordenarComparativa.selectionSort(4); 
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(selectionCidades, "resultados/selection_ordena.csv"); // CIDADES
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");*/
-		System.out.println();
-
-		// Algoritmos de recursão
-
-		// Merge sort
-		System.out.println("Merge sort: ");
-		tempoInicial = System.currentTimeMillis();
-
-		String[][] mergeMortes = ordenarRecursao.mergeSort(array.clone(), 1, array.length, 10);
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(mergeMortes, "resultados/merge_ordena_preco.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-
-		tempoInicial = System.currentTimeMillis();
-		String[][] mergeCasos = ordenarRecursao.mergeSort(array.clone(), 1, array.length, 12);
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(mergeCasos, "resultados/merge_ordena.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-
-		/*tempoInicial = System.currentTimeMillis();
-		String[][] mergeCidades = ordenarRecursao.mergeSort(arrayRecursao.clone(), 1, arrayRecursao.length, 4); 
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(mergeCidades, "resultados/merge_ordena.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");*/
-		System.out.println();
-
-		//QuickSort
-		System.out.println("quick sort: ");
-		tempoInicial = System.currentTimeMillis();
-		String[][] quickMortes = ordenarRecursao.quickSort(array.clone(), 1, array.length - 1, 10); 
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(quickMortes, "resultados/quick_ordena_preco.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-
-		tempoInicial = System.currentTimeMillis();
-		String[][] quickCasos = ordenarRecursao.quickSort(array.clone(), 1, array.length - 1, 12); 
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(quickCasos, "resultados/quick_ordena.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-
-		/*tempoInicial = System.currentTimeMillis();
-		String[][] quickCidades = ordenarRecursao.quickSort(array.clone(), 1, arrayRecursao.length - 1, 4); 
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(quickCidades, "resultados/quick_ordena.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");*/
-		System.out.println();
-
-		// Mediana de Três
-		System.out.println("QuickSort com Mediana de 3: ");
-		tempoInicial = System.currentTimeMillis();
-
-		String[][] medianaMortes = ordenarRecursao.medianaDeTres(array.clone(), 1,
-				array.length - 1, 10);
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(medianaMortes, "resultados/medianaDeTrês_ordena_preco.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-
-		tempoInicial = System.currentTimeMillis();
-		String[][] medianaCasos = ordenarRecursao.medianaDeTres(array.clone(), 1,
-				array.length - 1, 12); 
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(medianaCasos, "resultados/medianaDeTrês_ordena.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-
-		/*tempoInicial = System.currentTimeMillis();
-		String[][] medianaCidades = ordenarRecursao.medianaDeTres(arrayRecursao.clone(), 1,
-				arrayRecursao.length - 1, 4); 
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(medianaCidades, "resultados/medianaDeTrês_ordena.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");*/
-		System.out.println();
-
-		// Heapify sort
-		System.out.println("Heap sort: ");
-		tempoInicial = System.currentTimeMillis();
-
-		String[][] heapifyMortes = ordenarRecursao.sort(array.clone(), 10); // PREÇO
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(heapifyMortes, "resultados/Heapify_ordena_preco.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-		tempoInicial = System.currentTimeMillis();
-		String[][] heapifyCasos = ordenarRecursao.sort(array.clone(), 11); 
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(heapifyCasos, "resultados/Heapify_ordena.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");
-
-		/*tempoInicial = System.currentTimeMillis();
-		String[][] heapifyCidades = ordenarRecursao.sort(array.clone(), 4); 
-		tempoFinal = System.currentTimeMillis();
-		gerarCsv.writeInFile(heapifyCidades, "resultados/Heapify_ordena.csv");
-		System.out.println("Tempo de execução : " + (tempoFinal - tempoInicial) + " ms");*/
-		System.out.println();
 
 	}
 
