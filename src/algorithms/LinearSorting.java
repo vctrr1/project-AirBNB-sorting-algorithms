@@ -5,7 +5,7 @@ public class LinearSorting { // counting
 
 	}
 
-	public String[][] countSort(String[][] array, int dados) {
+	public String[][] countingSort(String[][] array, int dados) {
         
         int tamanho = array.length;
         String[][] saida = new String[tamanho + 1][0];
